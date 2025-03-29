@@ -331,15 +331,10 @@ router.get('/', async (req, res) => {
           font-size: 0.8em;
           color: #777;
           text-align: center;
-          padding: 4px 12px;
+          padding: 12px;
           background-color: #1a1a1a;
+          border-radius: 0 0 10px 10px;
           border-top: 1px solid #333;
-          height: 40px;                   /* fixed footer height */
-          flex-shrink: 0;
-          display: flex;
-          flex-direction: column;         /* Stack updater and hash on separate lines */
-          align-items: center;
-          justify-content: center;
         }
         .no-matches {
           display: flex;
@@ -706,51 +701,50 @@ router.get('/embed', async (req, res) => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Team ${formattedTeamKey} Matches</title>
       <style>
-        html, body {
-          height: 100%;
+        body {
+          font-family: 'Roboto', 'Segoe UI', sans-serif;
+          background-color: #0a0a0a;
+          color: #e0e0e0;
           margin: 0;
-          overflow: hidden; /* Prevent the whole page from scrolling */
+          padding: 0;
         }
         .container {
           max-width: 800px;
           margin: 0 auto;
-          border: 1px solid #333;
-          border-radius: 10px;             /* Rounded corners */
+          padding: 15px;
           height: ${containerHeight}px;
+          overflow: hidden;
           display: flex;
           flex-direction: column;
-          overflow: hidden;
           box-sizing: border-box;
         }
         .header {
           background: linear-gradient(135deg, #0277bd, #01579b);
           color: white;
-          height: 60px;                   /* fixed header height */
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          padding: 18px 20px;
+          border-radius: 10px 10px 0 0;
+          text-align: center;
           font-weight: bold;
           font-size: 1.3em;
           box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-          flex-shrink: 0;
-          border-radius: 10px 10px 0 0;     /* rounded top corners */
         }
         .event-info {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 0 15px;
+          padding: 8px 15px;
           background-color: #1a1a1a;
           border-bottom: 1px solid #333;
           font-size: 0.9em;
-          height: 40px;                   /* fixed event-info height */
-          flex-shrink: 0;
+        }
+        .now-queuing {
+          font-weight: bold;
+          color: #ff9800;
         }
         .content {
-          /* Subtract header (60px), event-info(40px), and footer (40px) heights */
-          height: calc(100% - 140px);
-          overflow-y: auto;               /* only this area scrolls */
-          padding: 10px 15px;
+          flex: 1;
+          overflow-y: auto;
+          padding: 10px 0;
           scrollbar-width: thin;
           scrollbar-color: #444 #1a1a1a;
         }
@@ -764,19 +758,170 @@ router.get('/embed', async (req, res) => {
           background-color: #444;
           border-radius: 4px;
         }
+        .match-group {
+          margin-bottom: 25px;
+        }
+        .match-group-title {
+          font-size: 1.1em;
+          font-weight: bold;
+          color: #4fc3f7;
+          padding: 10px 5px;
+          margin-bottom: 10px;
+          border-bottom: 1px solid #333;
+        }
+        .match-card {
+          background-color: #1d1d1d;
+          border-radius: 8px;
+          margin-bottom: 12px;
+          overflow: hidden;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+          transition: all 0.3s ease;
+        }
+        .match-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+        .match-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 15px;
+          cursor: pointer;
+          user-select: none;
+          transition: background-color 0.2s;
+        }
+        .match-header:hover {
+          background-color: #252525;
+        }
+        .match-header-left {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .alliance-dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          display: inline-block;
+        }
+        .red-alliance {
+          background-color: #f44336;
+        }
+        .blue-alliance {
+          background-color: #2196f3;
+        }
+        .match-number {
+          font-weight: bold;
+          font-size: 1.1em;
+        }
+        .match-status {
+          font-size: 0.8em;
+          padding: 3px 8px;
+          border-radius: 12px;
+          margin-left: 10px;
+          font-weight: 500;
+        }
+        .status-default {
+          background-color: #424242;
+        }
+        .status-queuing {
+          background-color: #ff9800;
+          color: #000;
+        }
+        .status-on-deck {
+          background-color: #ffc107;
+          color: #000;
+        }
+        .status-on-field {
+          background-color: #8bc34a;
+          color: #000;
+        }
+        .match-time {
+          font-size: 0.9em;
+          color: #bbb;
+        }
+        .match-content {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease-out;
+          background-color: #252525;
+        }
+        .match-card.active .match-content {
+          max-height: 500px;
+        }
+        .match-details {
+          padding: 15px;
+          border-top: 1px solid #333;
+        }
+        .alliance-section {
+          margin-bottom: 15px;
+        }
+        .alliance-title {
+          font-weight: bold;
+          margin-bottom: 8px;
+          display: flex;
+          align-items: center;
+        }
+        .red-title {
+          color: #f44336;
+        }
+        .blue-title {
+          color: #2196f3;
+        }
+        .alliance-teams {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .team-chip {
+          display: inline-flex;
+          align-items: center;
+          background-color: #333;
+          padding: 6px 12px;
+          border-radius: 16px;
+          font-size: 0.9em;
+          border-left: 3px solid transparent;
+        }
+        .team-chip.highlight {
+          background-color: #01579b;
+          font-weight: bold;
+        }
+        .red-team {
+          border-color: #f44336;
+        }
+        .blue-team {
+          border-color: #2196f3;
+        }
+        .time-section {
+          margin-top: 15px;
+          font-size: 0.85em;
+          color: #aaa;
+        }
+        .time-label {
+          font-weight: bold;
+          color: #bbb;
+          margin-bottom: 5px;
+        }
+        .time-row {
+          margin-bottom: 5px;
+        }
+        .break-indicator {
+          margin-top: 10px;
+          padding: 8px;
+          background-color: rgba(255, 193, 7, 0.1);
+          border-left: 3px solid #ffc107;
+          font-style: italic;
+          color: #ffc107;
+          border-radius: 4px;
+        }
         .footer {
           font-size: 0.8em;
           color: #777;
           text-align: center;
-          padding: 4px 12px;
+          padding: 12px;
           background-color: #1a1a1a;
+          border-radius: 0 0 10px 10px;
           border-top: 1px solid #333;
-          height: 40px;                   /* fixed footer height */
-          flex-shrink: 0;
-          display: flex;
-          flex-direction: column;         /* Stack updater and hash on separate lines */
-          align-items: center;
-          justify-content: center;
         }
         .no-matches {
           display: flex;
@@ -787,6 +932,35 @@ router.get('/embed', async (req, res) => {
           text-align: center;
           color: #888;
           font-size: 1.1em;
+        }
+        .no-matches svg {
+          margin-bottom: 15px;
+          color: #555;
+        }
+        #update-status {
+          font-size: 0.8em;
+          color: #777;
+          text-align: center;
+          transition: color 0.3s ease;
+        }
+        #update-status:contains('Checking') {
+          color: #ffc107;
+        }
+        #update-status:contains('Refreshing') {
+          color: #4caf50;
+        }
+        .completed-group {
+          margin-top: 20px;
+          border-top: 1px dashed #444;
+          padding-top: 20px;
+        }
+
+        .completed-group .match-group-title {
+          color: #9e9e9e;
+        }
+
+        .completed-group .match-card {
+          opacity: 0.8;
         }
       </style>
     </head>
@@ -895,7 +1069,8 @@ router.get('/embed', async (req, res) => {
                   <div class="time-section">
                     <div class="time-label">Match Times</div>
                     <div class="time-row">Scheduled: ${new Date(match.times.scheduledStartTime).toLocaleString()}</div>
-                    ${match.times.estimatedStartTime ? `<div class="time-row">Estimated: ${new Date(match.times.estimatedStartTime).toLocaleString()}</div>` : ''}
+                    ${match.times.estimatedStartTime ? 
+                      `<div class="time-row">Estimated: ${new Date(match.times.estimatedStartTime).toLocaleString()}</div>` : ''}
                   </div>
                   ${match.breakAfter ? 
                     `<div class="break-indicator">
