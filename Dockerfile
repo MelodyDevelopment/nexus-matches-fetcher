@@ -11,10 +11,10 @@ COPY src/ ./src/
 
 # Set environment variables
 ENV NODE_ENV=production
-ENV PORT=3001
+ENV PORT=3002
 
 # Expose the port
-EXPOSE 3001
+EXPOSE 3002
 
 # Start the application
 CMD ["node", "src/server/index.js"]

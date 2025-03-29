@@ -4,12 +4,12 @@ services:
     restart: always
     environment:
       - NODE_ENV=production
-      - PORT=${Port:-3001}
+      - PORT=${Port:-3002}
       - TBA_API_KEY=${TBA_API_KEY}
     ports:
-      - "${Port:-3001}:${Port:-3001}"
+      - "${Port:-3002}:${Port:-3002}"
     healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:${Port:-3001}/api/health"]
+      test: ["CMD", "wget", "-qO-", "http://localhost:${Port:-3002}/api/health"]
       interval: 30s
       timeout: 5s
       retries: 3

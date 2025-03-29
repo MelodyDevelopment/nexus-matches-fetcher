@@ -28,7 +28,7 @@ A service to fetch alliance matches of a specific team in an event using the Blu
 
    ```env
    Nexus_Api_Key=your_api_key_here
-   PORT=3001
+   PORT=3002
    ```
 
 4. Start the application:
@@ -70,7 +70,7 @@ A service to fetch alliance matches of a specific team in an event using the Blu
 2. Run the container:
 
    ```sh
-   docker run -d -p 3001:3001 --env NODE_ENV=production --env TBA_API_KEY=your_api_key_here nexus-matches-fetcher
+   docker run -d -p 3002:3002 --env NODE_ENV=production --env TBA_API_KEY=your_api_key_here nexus-matches-fetcher
    ```
 
 Alternatively, use the provided `docker-compose.yml`:
