@@ -796,6 +796,7 @@ router.get('/embed', async (req, res) => {
           cursor: pointer;
           user-select: none;
           transition: background-color 0.2s;
+          flex-wrap: wrap;
         }
         .match-header:hover {
           background-color: #252525;
@@ -804,6 +805,7 @@ router.get('/embed', async (req, res) => {
           display: flex;
           align-items: center;
           gap: 10px;
+          flex-wrap: wrap;
         }
         .alliance-dot {
           width: 12px;
@@ -827,6 +829,7 @@ router.get('/embed', async (req, res) => {
           border-radius: 12px;
           margin-left: 10px;
           font-weight: 500;
+          flex-wrap: nowrap;
         }
         .status-default {
           background-color: #424242;
@@ -846,6 +849,7 @@ router.get('/embed', async (req, res) => {
         .match-time {
           font-size: 0.9em;
           color: #bbb;
+          margin-top: 5px;
         }
         .match-content {
           max-height: 0;
@@ -968,6 +972,21 @@ router.get('/embed', async (req, res) => {
 
         .completed-group .match-card {
           opacity: 0.8;
+        }
+      @media (max-width: 600px) {
+        .match-header {
+          flex-direction: column; /* Stack items vertically */
+          align-items: flex-start; /* Align items to the left */
+        }
+
+        .match-header-left {
+          justify-content: space-between;
+          width: 100%; /* Ensure it spans the full width */
+        }
+
+        .match-time {
+          margin-top: 5px; /* Add spacing between status and time */
+          align-self: flex-end; /* Align time to the right */
         }
       </style>
     </head>
