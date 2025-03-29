@@ -712,10 +712,11 @@ router.get('/embed', async (req, res) => {
           max-width: 800px;
           margin: 0 auto;
           padding: 15px;
-          max-height: ${containerHeight}px;
+          height: ${containerHeight}px;
           overflow: hidden;
           display: flex;
           flex-direction: column;
+          box-sizing: border-box;
         }
         .header {
           background: linear-gradient(135deg, #0277bd, #01579b);
@@ -1004,7 +1005,7 @@ router.get('/embed', async (req, res) => {
         // Process each match
         sortedMatches.forEach(match => {
           // Render match card HTML
-          // Determine if team is on red or blue alliance
+// Determine if team is on red or blue alliance
           const isRed = match.redTeams.includes(formattedTeamKey);
           const allianceColor = isRed ? "red" : "blue";
           
