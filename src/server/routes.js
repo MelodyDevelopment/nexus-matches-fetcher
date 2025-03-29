@@ -331,10 +331,14 @@ router.get('/', async (req, res) => {
           font-size: 0.8em;
           color: #777;
           text-align: center;
-          padding: 12px;
+          padding: 0 12px;
           background-color: #1a1a1a;
-          border-radius: 0 0 10px 10px;
           border-top: 1px solid #333;
+          height: 40px;              /* fixed footer height */
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .no-matches {
           display: flex;
@@ -711,7 +715,8 @@ router.get('/embed', async (req, res) => {
         .container {
           max-width: 800px;
           margin: 0 auto;
-          padding: 15px;
+          /* Remove extra padding so our fixed heights sum up correctly */
+          padding: 0;
           height: ${containerHeight}px;
           overflow: hidden;
           display: flex;
@@ -721,30 +726,31 @@ router.get('/embed', async (req, res) => {
         .header {
           background: linear-gradient(135deg, #0277bd, #01579b);
           color: white;
-          padding: 18px 20px;
-          border-radius: 10px 10px 0 0;
-          text-align: center;
+          height: 60px;              /* fixed header height */
+          display: flex;
+          align-items: center;
+          justify-content: center;
           font-weight: bold;
           font-size: 1.3em;
           box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+          flex-shrink: 0;
         }
         .event-info {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 8px 15px;
+          padding: 0 15px;
           background-color: #1a1a1a;
           border-bottom: 1px solid #333;
           font-size: 0.9em;
-        }
-        .now-queuing {
-          font-weight: bold;
-          color: #ff9800;
+          height: 40px;              /* fixed event-info height */
+          flex-shrink: 0;
         }
         .content {
-          flex: 1;
-          overflow-y: auto;
-          padding: 10px 0;
+          /* The available content height equals total minus header, event-info, and footer heights */
+          height: calc(100% - 140px); /* 60px (header) + 40px (event-info) + 40px (footer) = 140px */
+          overflow-y: auto;          /* only content scrolls */
+          padding: 10px 15px;
           scrollbar-width: thin;
           scrollbar-color: #444 #1a1a1a;
         }
@@ -918,10 +924,14 @@ router.get('/embed', async (req, res) => {
           font-size: 0.8em;
           color: #777;
           text-align: center;
-          padding: 12px;
+          padding: 0 12px;
           background-color: #1a1a1a;
-          border-radius: 0 0 10px 10px;
           border-top: 1px solid #333;
+          height: 40px;              /* fixed footer height */
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         .no-matches {
           display: flex;
