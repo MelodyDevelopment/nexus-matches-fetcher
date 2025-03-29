@@ -5,7 +5,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=${Port:-3002}
-      - TBA_API_KEY=${TBA_API_KEY}
+      - Nexus_Api_Key=${Nexus_Api_Key}
     ports:
       - "${Port:-3002}:${Port:-3002}"
     healthcheck:
