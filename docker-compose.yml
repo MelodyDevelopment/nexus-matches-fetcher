@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/melodydevelopment/nexus-matchs:main
+    image: ghcr.io/melodydevelopment/nexus-matches-fetcher:main
     restart: always
     environment:
       - NODE_ENV=production
