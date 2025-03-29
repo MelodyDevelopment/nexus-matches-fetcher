@@ -510,8 +510,18 @@ router.get('/', async (req, res) => {
                   </div>
                   <div class="time-section">
                     <div class="time-label">Match Times</div>
-                    <div class="time-row">Scheduled: ${new Date(match.times.scheduledStartTime).toLocaleString()}</div>
-                    ${match.times.estimatedStartTime ? `<div class="time-row">Estimated: ${new Date(match.times.estimatedStartTime).toLocaleString()}</div>` : ''}
+                    <div class="time-row">Scheduled: ${new Date(match.times.scheduledStartTime).toLocaleString('en-US', {
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+              timeZone: 'Canada/Eastern' // Ensure EST
+            })}</div>
+                    ${match.times.estimatedStartTime ? `<div class="time-row">Estimated: ${new Date(match.times.estimatedStartTime).toLocaleString('en-US', {
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+              timeZone: 'Canada/Eastern' // Ensure EST
+            })}</div>` : ''}
                   </div>
                   ${match.breakAfter ? 
                     `<div class="break-indicator">
@@ -1095,9 +1105,19 @@ router.get('/embed', async (req, res) => {
                   </div>
                   <div class="time-section">
                     <div class="time-label">Match Times</div>
-                    <div class="time-row">Scheduled: ${new Date(match.times.scheduledStartTime).toLocaleString()}</div>
+                    <div class="time-row">Scheduled: ${new Date(match.times.scheduledStartTime).toLocaleString('en-US', {
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+              timeZone: 'Canada/Eastern' // Ensure EST
+            })}</div>
                     ${match.times.estimatedStartTime ? 
-                      `<div class="time-row">Estimated: ${new Date(match.times.estimatedStartTime).toLocaleString()}</div>` : ''}
+                      `<div class="time-row">Estimated: ${new Date(match.times.estimatedStartTime).toLocaleString('en-US', {
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+              timeZone: 'Canada/Eastern' // Ensure EST
+            })}</div>` : ''}
                   </div>
                   ${match.breakAfter ? 
                     `<div class="break-indicator">
