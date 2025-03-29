@@ -709,14 +709,19 @@ router.get('/embed', async (req, res) => {
           padding: 0;
         }
         .container {
-          max-width: 800px;
+          width: 100%;
           margin: 0 auto;
-          padding: 15px;
-          height: ${containerHeight}px;
+          padding: 0px;
+          height: 100%;
           overflow: hidden;
           display: flex;
           flex-direction: column;
           box-sizing: border-box;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
         }
         .header {
           background: linear-gradient(135deg, #0277bd, #01579b);
