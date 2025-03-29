@@ -386,7 +386,8 @@ router.get('/', async (req, res) => {
             timeDisplay = matchDate.toLocaleTimeString('en-US', {
               hour: 'numeric',
               minute: '2-digit',
-              hour12: true
+              hour12: true,
+              timeZone: 'Canada/Eastern' // Ensure EST
             });
           }
           let statusClass = "status-default";
@@ -466,7 +467,8 @@ router.get('/', async (req, res) => {
             timeDisplay = matchDate.toLocaleTimeString('en-US', {
               hour: 'numeric',
               minute: '2-digit',
-              hour12: true
+              hour12: true,
+              timeZone: 'Canada/Eastern' // Ensure EST
             });
           }
           let statusClass = "status-default";
@@ -1021,7 +1023,8 @@ router.get('/embed', async (req, res) => {
             timeDisplay = matchDate.toLocaleTimeString('en-US', {
               hour: 'numeric',
               minute: '2-digit',
-              hour12: true
+              hour12: true,
+              timeZone: 'Canada/Eastern' // Ensure EST
             });
           }
           
@@ -1130,7 +1133,8 @@ router.get('/embed', async (req, res) => {
             timeDisplay = matchDate.toLocaleTimeString('en-US', {
               hour: 'numeric',
               minute: '2-digit',
-              hour12: true
+              hour12: true,
+              timeZone: 'Canada/Eastern' // Ensure EST
             });
           }
           
