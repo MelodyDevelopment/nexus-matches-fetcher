@@ -132,7 +132,7 @@ router.get('/', async (req, res) => {
           flex-direction: column;
         }
         .header {
-          background: linear-gradient(135deg, #0277bd, #01579b);
+          background: linear-gradient(135deg, #8B0000, #660000);
           color: white;
           padding: 18px 20px;
           border-radius: 10px 10px 0 0;
@@ -726,7 +726,7 @@ router.get('/embed', async (req, res) => {
           bottom: 0;
         }
         .header {
-          background: linear-gradient(135deg, #0277bd, #01579b);
+          background: linear-gradient(135deg, #8B0000, #660000);
           color: white;
           padding: 18px 20px;
           border-radius: 10px 10px 0 0;
