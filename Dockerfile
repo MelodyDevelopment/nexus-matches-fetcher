@@ -9,6 +9,8 @@ RUN npm ci --only=production
 # Copy application code
 COPY src/ ./src/
 
+
+
 # Set environment variables
 ENV NODE_ENV=production
 ENV PORT=3002
