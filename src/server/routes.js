@@ -4,11 +4,12 @@ const { fetchEventDetails } = require('./api');
 const crypto = require('crypto');
 
 // GET /api/TBA-matches/test - Returns raw event data
-router.get('/test', async (req, res) => {
-  const { eventKey } = req.query;
-  const eventDetails = await fetchEventDetails(eventKey);
-  res.send(eventDetails);
-});
+// DO NOT UNCOMMENT THIS UNLESS YOU KNOW WHAT YOU'RE DOING AS THIS WILL ALLOW OTHERS TO EXPOLIT YOUR API KEY
+// router.get('/test', async (req, res) => {
+//   const { eventKey } = req.query;
+//   const eventDetails = await fetchEventDetails(eventKey);
+//   res.send(eventDetails);
+// });
 
 // GET / - Full page version of team match display
 router.get('/', async (req, res) => {
