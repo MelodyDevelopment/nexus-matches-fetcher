@@ -1,4 +1,4 @@
-Collecting workspace information```md
+```md
 # Nexus Matches Fetcher
 
 A service to fetch alliance matches of a specific team in an event using the Blue Alliance API.
