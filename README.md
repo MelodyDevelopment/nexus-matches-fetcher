@@ -1,4 +1,6 @@
-```md
+# Deprecated! Checkout https://vorel.app instead!
+
+
 # Nexus Matches Fetcher
 
 A service to fetch alliance matches of a specific team in an event using the Blue Alliance API.
@@ -95,4 +97,3 @@ Contributions are welcome! Open issues or pull requests as needed.
 
 - Developed by [Melodydevelopment](https://github.com/Melodydevelopment)
 - Data provided by the FIRST Nexus API
-```
